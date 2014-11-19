@@ -2,7 +2,7 @@
 
   <!--ヘッダー領域-->
   <div data-role="header">
-    <h1>jQuery Mobile TIPS</h1>
+    <h1>Scoreboard</h1>
   </div>
 
   <div role="main" class="ui-content">
