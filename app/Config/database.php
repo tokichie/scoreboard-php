@@ -75,7 +75,8 @@ class DATABASE_CONFIG {
             'database' => getenv('DB_NAME'),
             'prefix' => '',
             'encoding' => 'utf8',
-	);
+        );
+    }
 
 	public $test = array(
 		'datasource' => 'Database/Mysql',
