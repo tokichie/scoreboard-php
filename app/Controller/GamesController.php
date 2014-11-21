@@ -2,10 +2,8 @@
 
 App::uses('AppController', 'Controller');
 
-class ScoreboardController extends AppController {
-
-    public function index() {
-    }
+class GamesController extends AppController {
+    var $uses = array('Game');
 
     public function add() {
     }
@@ -14,7 +12,10 @@ class ScoreboardController extends AppController {
         $this->autoRender = false;
 
         if ($this->request->is('post')) {
-            if ($this->Game->save($this->request->data)) {
+            $data = $this->request->data;
+            $data = Hash::insert($data, 'Game.status', 'playing');
+            $this->Game->create();
+            if ($this->Game->save($data)) {
                 $this->Session->setFlash('ゲームが追加されました');
                 return $this->redirect(array('controller' => 'scoreboard'));
             }

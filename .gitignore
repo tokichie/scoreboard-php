@@ -1,6 +1,6 @@
 # User specific & automatically generated files #
 #################################################
-/app/Config/database.php
+/app/Config/database.*
 /app/tmp
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins
@@ -28,3 +28,4 @@ Thumbs.db
 
 *.swp
 *~
+/db_dump/
