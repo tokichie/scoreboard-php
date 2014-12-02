@@ -2,6 +2,12 @@
 App::uses('AppModel', 'Model');
 
 class Game extends AppModel {
-    var $name = 'Game';
-    var $useTable = 'games';
+    public $name = 'Game';
+    public $useTable = 'games';
+
+    public $hasMany = array(
+        'Score' => array(
+            'className' => 'Score',
+        )
+    );
 }

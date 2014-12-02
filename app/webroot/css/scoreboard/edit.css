@@ -1,0 +1,11 @@
+.ui-input-text {
+    display: inline-block;
+    float: left;
+}
+.ui-btn {
+    margin: 0px;
+    padding: 0px .1em 0px .1em;
+}
+table tr td {
+    text-align: center;
+}
