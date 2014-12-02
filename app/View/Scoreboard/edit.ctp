@@ -1,12 +1,23 @@
 <?php 
-echo $this->Html->css('Scoreboard/edit');
+echo $this->Html->css('scoreboard/edit');
+echo $this->Html->script('scoreboard/edit');
 
-$next_inning = max(array_keys($scores['t']));
-if (max(array_keys($scores['t'])) > max(array_keys($scores['b']))) {
-    $next_inning_side = 'b';
+if (!array_key_exists('t', $scores)) {
+  $scores = array('t' => array(), 'b' => array());
+  $next_inning = 1;
+  $next_inning_side = 't';
+} else if (!array_key_exists('b', $scores)) {
+  $scores += array('b' => array());
+  $next_inning = 1;
+  $next_inning_side = 'b';
 } else {
+  $next_inning = max(array_keys($scores['t']));
+  if (max(array_keys($scores['t'])) > max(array_keys($scores['b']))) {
+    $next_inning_side = 'b';
+  } else {
     $next_inning_side = 't';
     $next_inning++;
+  }
 }
 ?>
 
@@ -19,16 +30,23 @@ if (max(array_keys($scores['t'])) > max(array_keys($scores['b']))) {
     <td class="team_name"><?php echo $game['team1']?></td>
     <?php for ($i = 1; $i <= 9; $i++): ?>
     <td>
-    <?php //array_key_exists($i, $scores['t']) ? print($scores['t'][$i]) : null ?>
     <?php if (array_key_exists($i, $scores['t'])): ?>
-        <?php echo $scores['t'][$i]; ?>
+      <?php echo $this->Html->link(
+        $scores['t'][$i],
+        '#',
+        array(
+          'class' => 'add_score',
+          'value' => 't' . $i,
+        )
+      );
+      ?>
     <?php else: ?>
         <?php if ($next_inning == $i and $next_inning_side == 't'): ?>
-            <?php echo $this->Html->link(
-                '+',
-                'aa',
-                array('class' => 'ui-btn')
-            ); ?>
+<?php echo $this->Html->link(
+  '+',
+  '#',
+  array('class' => 'ui-btn add_score')
+); ?>
         <?php endif; ?>
     <?php endif; ?>
     </td>
@@ -36,61 +54,67 @@ if (max(array_keys($scores['t'])) > max(array_keys($scores['b']))) {
     <tr>
     <td class="team_name"><?php echo $game['team2']?></td>
     <?php for ($i = 1; $i <= 9; $i++): ?>
-    <td><?php //array_key_exists($i, $scores['b']) ? print($scores['b'][$i]) : null ?>
+    <td>
     <?php if (array_key_exists($i, $scores['b'])): ?>
-        <?php //echo $scores['b'][$i]; ?>
-        <?php echo $this->Html->link(
-            $scores['b'][$i],
-            '#'
-            );
-        ?>
+      <?php echo $this->Html->link(
+        $scores['b'][$i],
+        '#',
+        array(
+          'class' => 'add_score',
+          'value' => 'b' . $i,
+        )
+      );
+      ?>
     <?php else: ?>
-        <?php if ($next_inning == $i and $next_inning_side == 'b'): ?>
-            <?php echo $this->Html->link(
-                '+',
-                '#dialog',
-                array(
-                    'class' => 'ui-btn ui-corner-all ui-btn-a',
-                    'data-rel' => 'dialog',
-                    'data-transition' => 'pop'
-                )
-            ); ?>
-        <?php endif; ?>
+      <?php if ($next_inning == $i and $next_inning_side == 'b'): ?>
+        <?php echo $this->Html->link(
+          '+',
+          '#',
+          array(
+            'class' => 'ui-btn ui-corner-all add_score',
+          )
+        ); ?>
+      <?php endif; ?>
     <?php endif; ?>
     </td>
     <?php endfor; ?>
 </table>
 
-<div data-role="page" id="dialog">
-    <div data-role="header">
-        <h1>点数追加・変更</h1>
-    </div>
-    <div data-role="content">
-    <?php 
-    if ($next_inning < 10) {
-        echo $this->Form->create('Score', array(
-            'method' => 'post',
-            'action' => 'add'
-        ));
-        echo $this->Form->input('inning',
-            array(
-                'type' => 'hidden',
-                'value' => $next_inning
-            ));
-        echo $this->Form->input('side',
-            array(
-                'type' => 'hidden',
-                'value' => $next_inning_side
-            ));
-        echo $this->Form->input('score',
-            array(
-                'type' => 'text',
-                'label' => $next_inning . '回' . (($next_inning_side == 't') ? '表: ' : '裏: '),
-                'class' => 'score'
-            ));
-        echo $this->Form->end('イニング追加');
-    }
-    ?>
-    </div>
+<div id="edit_score">
+  <?php 
+  if ($next_inning < 10) {
+    echo $this->Form->create('Score',
+      array(
+        'type' => 'post',
+        'action' => 'add'
+      ));
+    echo $this->Form->input('game_id',
+      array(
+        'type' => 'hidden',
+        'value' => $game_id
+      ));
+    echo $this->Form->input('inning',
+      array(
+        'type' => 'hidden',
+        'value' => $next_inning
+      ));
+    echo $this->Form->input('side',
+      array(
+        'type' => 'hidden',
+        'value' => $next_inning_side
+      ));
+    echo $this->Form->input('score',
+      array(
+        'type' => 'text',
+        'label' => $next_inning . '回' . (($next_inning_side == 't') ? '表: ' : '裏: '),
+        'class' => 'score'
+      ));
+    echo $this->Form->end('add');
+    //echo $this->Form->button('add', 
+    //  array(
+    //    'class' => 'add_btn'
+    //  ));
+  }
+  ?>
 </div>
 

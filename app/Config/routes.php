@@ -25,6 +25,7 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'scoreboard'));
+  Router::connect('/scoreboard/edit/add_score', array('controller' => 'scoreboard', 'action' => 'add_score'));
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
