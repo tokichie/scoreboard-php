@@ -37,11 +37,18 @@ class AppController extends Controller {
       'loginRedirect' => array('controller' => 'scoreboard', 'action' => 'index'),
       'logoutRedirect' => array('controller' => 'scoreboard', 'action' => 'index'),
       'authorize' => array('Controller')
-    )
+    ),
+    'Security'
   );
 
   public function beforeFilter() {
+    $this->Security->blackHoleCallback = 'forceSSL';
+    $this->Security->requireSecure();
     $this->Auth->allow('index', 'edit');
+  }
+
+  public function forseSSL() {
+    $this->redirect('https://' . env('SERVER_NAME') . $this->here);
   }
 
   public function isAuthorized($user) {
