@@ -1,11 +1,36 @@
 .ui-input-text {
-    display: inline-block;
-    float: left;
+  display: inline-block;
+  float: left;
+  width: 5em;
 }
 .add_score {
-    margin: 0px;
-    padding: 0px .1em 0px .1em;
+  margin: 0px;
+  padding: 0px .1em 0px .1em;
 }
 table tr td {
-    text-align: center;
+  text-align: center;
+}
+.ui-btn.end_game {
+  clear: both;
+  border-color: #0A0;
+  color: #0A0;
+}
+.ui-btn.delete_game {
+  clear: both;
+  border-color: #F00;
+  color: #F00;
+}
+.ui-btn.start_game {
+  clear: both;
+  border-color: #00F;
+  color: #00F;
+}
+.input.text.required {
+  float: left;
+}
+.submit {
+  display: table-cell;
+}
+.ui-btn.ui-input-btn {
+  margin-top: 35px;
 }

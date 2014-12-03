@@ -36,14 +36,4 @@ echo $this->Form->input('start_time',
     'data-options' => '{"mode":"timeflipbox"}',
   ));
 
-echo $this->Form->input('end_time',
-  array(
-    'type' => 'text',
-    'label' => '終了予定時刻',
-    'data-role' => 'datebox',
-    'data-options' => '{"mode":"timeflipbox"}',
-  ));
-?>
-
-
-<?php echo $this->Form->end('追加'); ?>
+echo $this->Form->end('追加'); ?>

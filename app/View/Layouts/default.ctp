@@ -41,8 +41,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </head>
 <body>
 	<div id="container" data-role="page">
-        <div id="header" data-role="header">
-            <h1>Scoreboard</h1>
+        <div id="header" data-role="header" style="text-align: center">
+            Scoreboard
         </div>
 		<div id="content" role="main" class="ui-content">
 
@@ -54,8 +54,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             <h3>Copyright 2014, tokichie@github</h3>
             <div data-role="navbar">
                 <ul>
-                    <li><a href="/" class="ui-btn-active">ホーム</a></li>
-                    <li><a href="scoreboard/add/">試合を追加</a></li>
+                    <li><a href="/cakephp/" class="ui-btn-active">ホーム</a></li>
+                    <?php if ($user): ?>
+                    <li><a href="/cakephp/scoreboard/add/">試合を追加</a></li>
+                    <li><a href="/cakephp/scoreboard/logout/">ログアウト</a></li>
+                    <?php else: ?>
+                    <li><a href="/cakephp/scoreboard/login/">ログイン</a></li>
+                    <?php endif ?>
                 </ul>
             </div>
 		</div>

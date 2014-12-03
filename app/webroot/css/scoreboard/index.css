@@ -1,3 +1,4 @@
+/*
 .row {
   display: table;
   text-align: center;
@@ -10,25 +11,65 @@
   font-size: large;
   width: 50%;
 }
-.score {
-  font-size: x-large;
+.status {
   text-align: center;
   margin: 0;
   position: absolute;
   top: 1em;
-  left: 50%;
+  left: 45%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
 }
-.score_ {
-  font-size: x-large;
-  width: 50%;
-}
+*/
 a.playing {
   position: relative;
-  height: 4em;
+  height: 3em;
+  padding: .5em;
 }
 a.standby {
   position: relative;
+  height: 1.25em;
+  padding: .5em;
+}
+
+.row {
+  text-align: center;
+  width: 7em;
   height: 2em;
 }
+.team_info {
+  display: inline-block;
+  float: left;
+}
+.info_container {
+  width: 100%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+.status {
+  text-align: center;
+  width: 3em;
+}
+.ui-listview> li a.playing p.hyphen {
+  margin-top: 10px;
+  vertical-align: middle;
+  height: 4em;
+}
+
+.ui-listview> li a.standby p.hyphen {
+  margin-top: -.25em;
+}
+
+.ui-listview>li p {
+  margin: 0;
+}
+
+.ui-listview>li p.score {
+  font-size: 1.5em;
+}
+
+.ui-listview>li p.team_name {
+  font-size: 1em;
+}
+

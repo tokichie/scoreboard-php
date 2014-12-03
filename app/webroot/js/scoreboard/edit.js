@@ -1,5 +1,5 @@
 $(function($) {
-  $('#edit_score').hide();
+  //$('#edit_score').hide();
 
   $('.add_score').click(function() {
     console.log($(this).html());
