@@ -33,7 +33,7 @@ echo $this->Form->input('start_time',
     'type' => 'text',
     'label' => '開始予定時刻',
     'data-role' => 'datebox',
-    'data-options' => '{"mode":"timeflipbox"}',
+    'data-options' => '{"mode":"timeflipbox", "minHour":7, "maxHour":17, "minuteStep":10}',
   ));
 
 echo $this->Form->end('追加'); ?>

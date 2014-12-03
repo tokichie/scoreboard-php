@@ -25,7 +25,6 @@ class ScoresController extends AppController {
           )
         );
       }
-      $this->log($data, 'debug');
       if ($this->Score->saveAssociated($data)) {
         return $this->redirect(array(
           'controller' => 'scoreboard',
@@ -34,5 +33,17 @@ class ScoresController extends AppController {
         ));
       }
     }
+  }
+
+  public function deleteAll() {
+    $this->autoRender = false;
+    if ($this->Score->deleteAll(array('Score.id >=' => '1'))) {
+      $this->Session->setFlash(__('スコアを全て削除しました'));
+    }
+    $this->Score->Game->updateAll(
+      array('Game.status' => 'standby'),
+      array()
+    );
+    $this->redirect(array('controller' => 'scoreboard', 'action' => 'index'));
   }
 }
