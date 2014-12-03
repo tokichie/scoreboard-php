@@ -19,17 +19,19 @@ if (!array_key_exists('t', $scores)) {
     $next_inning++;
   }
 }
+$t_sum = array_sum($scores['t']);
+$b_sum = array_sum($scores['b']);
 ?>
 
 <table width="100%">
     <td></td>
-    <?php for ($i = 1; $i <= 10; $i++): ?>
-    <td><?php ($i < 10) ? print($i) : print('R')  ?></td>
+    <?php for ($i = 1; $i <= 4; $i++): ?>
+    <td><?php ($i < 4) ? print($i) : print('R')  ?></td>
     <?php endfor; ?>
     <tr>
     <td class="team_name"><?php echo $game['team1']?></td>
-    <?php for ($i = 1; $i <= 9; $i++): ?>
-    <td>
+    <?php for ($i = 1; $i <= 4; $i++): ?>
+    <td name="<?php ($i == 4) ? print('tR') : print('t' . $i)?>">
     <?php if (array_key_exists($i, $scores['t'])): ?>
       <?php echo $this->Html->link(
         $scores['t'][$i],
@@ -40,21 +42,27 @@ if (!array_key_exists('t', $scores)) {
         )
       );
       ?>
+    <?php elseif ($i < 4) : ?>
+      <?php if ($next_inning == $i and $next_inning_side == 't'): ?>
+        <?php echo $this->Html->link(
+          '+',
+          '#',
+          array('class' => 'ui-btn add_score')
+        ); ?>
+      <?php endif; ?>
     <?php else: ?>
-        <?php if ($next_inning == $i and $next_inning_side == 't'): ?>
-<?php echo $this->Html->link(
-  '+',
-  '#',
-  array('class' => 'ui-btn add_score')
-); ?>
-        <?php endif; ?>
+      <?php if ($t_sum > $b_sum): ?>
+        <b><?php echo $t_sum ?></b>
+      <?php else: ?>
+        <?php echo $t_sum ?>
+      <?php endif ?>
     <?php endif; ?>
     </td>
     <?php endfor; ?>
     <tr>
     <td class="team_name"><?php echo $game['team2']?></td>
-    <?php for ($i = 1; $i <= 9; $i++): ?>
-    <td>
+    <?php for ($i = 1; $i <= 4; $i++): ?>
+    <td name="<?php ($i == 4) ? print('bR') : print('b' . $i)?>">
     <?php if (array_key_exists($i, $scores['b'])): ?>
       <?php echo $this->Html->link(
         $scores['b'][$i],
@@ -65,7 +73,7 @@ if (!array_key_exists('t', $scores)) {
         )
       );
       ?>
-    <?php else: ?>
+    <?php elseif ($i < 4): ?>
       <?php if ($next_inning == $i and $next_inning_side == 'b'): ?>
         <?php echo $this->Html->link(
           '+',
@@ -75,6 +83,12 @@ if (!array_key_exists('t', $scores)) {
           )
         ); ?>
       <?php endif; ?>
+    <?php else: ?>
+      <?php if ($b_sum > $t_sum): ?>
+        <b><?php echo $b_sum ?></b>
+      <?php else: ?>
+        <?php echo $b_sum ?>
+      <?php endif ?>
     <?php endif; ?>
     </td>
     <?php endfor; ?>
@@ -82,7 +96,7 @@ if (!array_key_exists('t', $scores)) {
 
 <div id="edit_score">
   <?php 
-  if ($next_inning < 10) {
+  if ($next_inning < 4) {
     echo $this->Form->create('Score',
       array(
         'type' => 'post',

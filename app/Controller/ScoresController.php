@@ -7,9 +7,26 @@ class ScoresController extends AppController {
 
   public function add() {
     $this->autoRender = false;
-    $this->log($this->data, 'debug');
     if ($this->request->is('post')) {
-      if ($this->Score->save($this->request->data)) {
+      $data = $this->request->data;
+      if ($data['Score']['inning'] == '1' and $data['Score']['side'] == 't') {
+        $data += array(
+          'Game' => array(
+            'id' => $data['Score']['game_id'],
+            'status' => 'playing',
+          )
+        );
+      }
+      if ($data['Score']['inning'] == '3' and $data['Score']['side'] == 'b') {
+        $data += array(
+          'Game' => array(
+            'id' => $data['Score']['game_id'],
+            'status' => 'finished',
+          )
+        );
+      }
+      $this->log($data, 'debug');
+      if ($this->Score->saveAssociated($data)) {
         return $this->redirect(array(
           'controller' => 'scoreboard',
           'action' => 'edit',

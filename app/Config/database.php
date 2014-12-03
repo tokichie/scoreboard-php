@@ -69,10 +69,10 @@ class DATABASE_CONFIG {
         $this->default = array(
             'datasource' => 'Database/Postgres',
             'persistent' => false,
-            'host' => getenv('DB_HOST'),
-            'login' => getenv('DB_USER'),
-            'password' => getenv('DB_PASS'),
-            'database' => getenv('DB_NAME'),
+            'host' => 'localhost',
+            'login' => 'postgres',
+            'password' => 'to02yu11',
+            'database' => 'scoreboard',
             'prefix' => '',
             'encoding' => 'utf8',
         );

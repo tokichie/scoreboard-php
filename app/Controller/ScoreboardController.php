@@ -12,6 +12,7 @@ class ScoreboardController extends AppController {
   }
 
   public function add() {
+    $this->set('locations', $this->Game->locations);
   }
 
   public function add_game() {

@@ -1,0 +1,34 @@
+.row {
+  display: table;
+  text-align: center;
+  width: 15em;
+}
+.column {
+  display: table-cell;
+}
+.team_name {
+  font-size: large;
+  width: 50%;
+}
+.score {
+  font-size: x-large;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 1em;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+.score_ {
+  font-size: x-large;
+  width: 50%;
+}
+a.playing {
+  position: relative;
+  height: 4em;
+}
+a.standby {
+  position: relative;
+  height: 2em;
+}
