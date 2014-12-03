@@ -22,6 +22,19 @@ class GamesController extends AppController {
         }
     }
 
+    public function switch_side() {
+      $this->autoRender = false;
+
+      if ($this->request->is('post')) {
+        if ($this->Game->save($this->request->data)) {
+          $this->Session->setFlash(__('先攻後攻を入れ替えました'));
+        } else {
+          $this->Session->setFlash(__('先攻後攻の入れ替えができませんでした'));
+        }
+        $this->redirect(array('controller' => 'scoreboard', 'action' => 'edit', $this->request->data['Game']['id']));
+      }
+    }
+
     public function end() {
       $this->autoRender = false;
 

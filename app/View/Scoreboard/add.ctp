@@ -1,7 +1,7 @@
 <?php
-echo $this->Html->css('jqm-datebox-1.4.5.min', array('inline' => false));
-echo $this->Html->script('jqm-datebox.core', array('inline' => false));
-echo $this->Html->script('jqm-datebox.mode.flipbox', array('inline' => false));
+echo $this->Html->css('jqm-datebox-1.4.5.min');
+echo $this->Html->script('jqm-datebox.core');
+echo $this->Html->script('jqm-datebox.mode.flipbox');
 
 echo $this->Form->create('Game',
   array(

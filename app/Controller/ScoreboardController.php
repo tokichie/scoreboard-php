@@ -12,6 +12,38 @@ class ScoreboardController extends AppController {
 
   public function index() {
     $games = $this->Game->find('all');
+    $games_by_status = array(
+      'standby' => array(),
+      'playing' => array(),
+      'finished' => array()
+    );
+    $timestamps = array(
+      'standby' => array(),
+      'playing' => array(),
+      'finished' => array()
+    );
+    foreach ($games as $game) {
+      $status = $game['Game']['status'];
+      $games_by_status[$status][] = $game;
+      if ($status == 'standby') {
+        $timestamps[$status][] = $game['Game']['start_time'];
+      } else {
+        $timestamps[$status][] = $game['Game']['modified'];
+      }
+    }
+
+    array_multisort($timestamps['standby'], SORT_ASC, $games_by_status['standby']);
+    array_multisort($timestamps['playing'], SORT_DESC, $games_by_status['playing']);
+    array_multisort($timestamps['finished'], SORT_DESC, $games_by_status['finished']);
+
+    $games = array_merge(
+      array(0 => array('divider' => 'standby')),
+      $games_by_status['standby'],
+      array(1 => array('divider' => 'playing')),
+      $games_by_status['playing'],
+      array(2 => array('divider' => 'finished')),
+      $games_by_status['finished']
+    );
     $this->set('games', $games);
     $this->set('locations', $this->Game->locations);
     $this->set('user', $this->Auth->user());
@@ -72,9 +104,4 @@ class ScoreboardController extends AppController {
     $this->redirect(array('action' => 'index'));
   }
 
-  //public function add_score() {
-  //  $this->autoRender = false;
-  //  $this->log($_POST, 'debug');
-  //  return json_encode(array('test' => '123'));
-  //}
 }

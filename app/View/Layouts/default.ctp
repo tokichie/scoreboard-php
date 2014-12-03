@@ -54,12 +54,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             <h3>Copyright 2014, tokichie@github</h3>
             <div data-role="navbar">
                 <ul>
-                    <li><a href="/cakephp/" class="ui-btn-active">ホーム</a></li>
+                    <li><a style="color: #000" href="<?php echo $this->Html->url('/')?>" class="ui-btn-active">ホーム</a></li>
                     <?php if ($user): ?>
-                    <li><a href="/cakephp/scoreboard/add/">試合を追加</a></li>
-                    <li><a href="/cakephp/scoreboard/logout/">ログアウト</a></li>
+                    <li><a style="color: #000" href="<?php echo $this->Html->url(array('controller' => 'scoreboard', 'action' => 'add')) ?>">試合を追加</a></li>
+                    <li><a style="color: #000" href="<?php echo $this->Html->url(array('controller' => 'scoreboard', 'action' => 'logout')) ?>">ログアウト</a></li>
                     <?php else: ?>
-                    <li><a href="/cakephp/scoreboard/login/">ログイン</a></li>
+                    <li><a style="color: #000" href="<?php echo $this->Html->url(array('controller' => 'scoreboard', 'action' => 'login')) ?>">ログイン</a></li>
                     <?php endif ?>
                 </ul>
             </div>

@@ -216,6 +216,32 @@ $b_sum = array_sum($scores['b']);
       echo $this->Form->create('Game',
         array(
           'type' => 'post',
+          'action' => 'switch_side',
+        ));
+      echo $this->Form->input('id',
+        array(
+          'type' => 'hidden',
+          'value' => $game_id
+        ));
+      echo $this->Form->input('team1',
+        array(
+          'type' => 'hidden',
+          'value' => $game['team2']
+        ));
+      echo $this->Form->input('team2',
+        array(
+          'type' => 'hidden',
+          'value' => $game['team1']
+        ));
+      echo $this->Form->button('先攻後攻入れ替え',
+        array(
+          'class' => 'switch_side'
+        ));
+      echo $this->Form->end();
+
+      echo $this->Form->create('Game',
+        array(
+          'type' => 'post',
           'action' => 'start',
         ));
       echo $this->Form->input('id',

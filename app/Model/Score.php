@@ -13,6 +13,10 @@ class Score extends AppModel {
   );
 
   public $validate = array(
-    'score' => 'numeric'
+    'score' => array(
+      'rule' => array('naturalNumber', true),
+      'message' => '0以上の整数を入力してください',
+      'allowEmpty' => false
+    )
   );
 }
