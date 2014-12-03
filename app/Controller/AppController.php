@@ -38,16 +38,28 @@ class AppController extends Controller {
       'logoutRedirect' => array('controller' => 'scoreboard', 'action' => 'index'),
       'authorize' => array('Controller')
     ),
-    'Security'
+    //'Ssl' => array(
+    //  'secured' => array(
+    //    'scoreboard' => '*',
+    //    'games' => '*',
+    //    'scores' => '*'
+    //  )
+    //)
+    //'Security'
   );
 
   public function beforeFilter() {
-    $this->Security->blackHoleCallback = 'forceSSL';
-    $this->Security->requireSecure();
+    //$this->Security->validatePost = false;
+    //$this->Security->blackHoleCallback = 'forceSSL';
+    //$this->Security->requireSecure();
+    //$this->Security->requirePost();
     $this->Auth->allow('index', 'edit');
+    if (is_null(env('HTTPS'))) {
+    $this->redirect('https://' . env('SERVER_NAME') . $this->here);
+    }
   }
 
-  public function forseSSL() {
+  public function forceSSL() {
     $this->redirect('https://' . env('SERVER_NAME') . $this->here);
   }
 
