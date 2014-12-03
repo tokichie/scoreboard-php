@@ -22,10 +22,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <head>
 	<?php echo $this->Html->charset(); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
-	</title>
+	<title>Scoreboard</title>
 	<?php
 		echo $this->Html->meta('icon');
 
